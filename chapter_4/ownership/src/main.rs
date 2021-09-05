@@ -25,7 +25,9 @@ fn main() {
     // this pass a copy of x to makes_copy
     makes_copy(x);
 
-    // x is still valid down here
+    // x is still valid down here. HOWEVER because the x that was passed into makes_copy()
+    // was a copy, the update to the variable (+=1) only applied that the new x. 
+    // this x is still 5.
     println!("x: {}", x);
     
 }
@@ -37,7 +39,8 @@ fn takes_ownership(some_string: String) {
 
 }
 
-fn makes_copy(some_integer: i32) {
+fn makes_copy(mut some_integer: i32) {
+    some_integer += 1;
     // some_integer has a copy of x, so x is still valid
     println!("{}", some_integer)
 }

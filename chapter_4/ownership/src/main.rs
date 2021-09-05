@@ -9,6 +9,16 @@ fn main() {
     // This line makes the program uncompilable as s no longer owns the value
     // println!("{}", s);
 
+
+    //// These calls below show that integers aren't constrained by the same ownership
+    //// rules as things like strings. This is because integers are of a known fixed size
+    //// so it's trivial to just make another copy on the stack for the new variable.
+    //// Strings (heap ones, not literals) like the one above, are mutable and you cannot
+    //// just make an easy copy on the stack because they arent even stored on the stack
+    //// they are on the heap and can grow and shrink in size, so copies are not made.
+    //// the implication with the previous stuff is that you can pass an int (like x below)
+    //// into a function and it will make a copy for the function, meaning you retain ownership
+    //// of the variable in the original scope too.
     // x owns the value 5
     let x = 5;
 
@@ -16,6 +26,7 @@ fn main() {
     makes_copy(x);
 
     // x is still valid down here
+    println!("x: {}", x);
     
 }
 
